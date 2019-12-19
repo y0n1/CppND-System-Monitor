@@ -1,0 +1,37 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "all",
+            "type": "shell",
+            "command": "make all"
+        },
+        {
+            "label": "format",
+            "type": "shell",
+            "command": "make format"
+        },
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "make build"
+        },
+        {
+            "label": "debug",
+            "type": "shell",
+            "command": "make debug"
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "make clean"
+        },
+        {
+            "label": "run",
+            "type": "shell",
+            "command": "make debug && ${workspaceFolder}/build/monitor"
+        },
+    ]
+}
