@@ -21,7 +21,7 @@ RUN apt-get update \
     # Verify git, process tools, lsb-release (common in install instructions for CLIs) installed
     && apt-get -y install git iproute2 procps lsb-release \
     # Install required dependencies
-    && apt-get -y install build-essential libncurses5-dev libncursesw5-dev clang-format cmake \
+    && apt-get -y install build-essential clang-format gdb cmake libncurses5-dev libncursesw5-dev \
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
     && groupadd --gid $USER_GID $USERNAME \
     && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
