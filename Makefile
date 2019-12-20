@@ -1,9 +1,13 @@
 .PHONY: all
-all: format test build
+all: format test build run
 
 .PHONY: format
 format:
 	clang-format src/* include/* -i
+
+.PHONY: test
+test:
+	echo "No test to run yet..."
 
 .PHONY: build
 build:
@@ -22,3 +26,7 @@ debug:
 .PHONY: clean
 clean:
 	rm -rf build
+
+.PHONY: run
+run: 
+	[ -f build/monitor ] && build/monitor
