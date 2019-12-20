@@ -31,7 +31,7 @@
         {
             "label": "run",
             "type": "shell",
-            "command": "make debug && ${workspaceFolder}/build/monitor"
-        },
+            "command": "make run"
+        }
     ]
 }
