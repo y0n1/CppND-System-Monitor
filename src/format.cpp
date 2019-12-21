@@ -10,10 +10,10 @@ string Format::ElapsedTime(long totalSeconds) {
   int minutes = (totalSeconds / 60) % 60;
   int hours = (totalSeconds / 3600) % 24;
 
-  const string OUTPUT_FORMAT {"HH:MM:SS"};
-  char buffer[OUTPUT_FORMAT.length + 1];
+  const string OUTPUT_FORMAT{"HH:MM:SS"};
+  char buffer[OUTPUT_FORMAT.length() + 1];
   sprintf(buffer, "%02d:%02d:%02d", hours, minutes, seconds);
-  string uptime {buffer};
+  string uptime{buffer};
 
   return uptime;
 }

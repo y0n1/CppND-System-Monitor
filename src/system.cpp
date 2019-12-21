@@ -1,6 +1,3 @@
-#include <unistd.h>
-#include <cstddef>
-#include <set>
 #include <string>
 #include <vector>
 
@@ -9,8 +6,6 @@
 #include "processor.h"
 #include "system.h"
 
-using std::set;
-using std::size_t;
 using std::string;
 using std::vector;
 
