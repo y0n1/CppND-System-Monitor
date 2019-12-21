@@ -2,13 +2,33 @@
 #include <unistd.h>
 #include <string>
 #include <vector>
+#include <cmath>
 
 #include "linux_parser.h"
 
-using std::stof;
 using std::string;
-using std::to_string;
 using std::vector;
+
+const string kTotalProcesses = "processes";
+const string kRunningProcesses = "procs_running";
+
+int getProcessesStatistics(const string processKind) {
+  int stats {};
+  string label, value, line;
+  std::ifstream fileStream(LinuxParser::kProcDirectory +
+                       LinuxParser::kStatFilename);
+  if (fileStream.is_open()) {
+    do {
+      std::getline(fileStream, line);
+    } while (line.rfind(processKind, 0) != 0);
+
+    std::istringstream linestream(line);
+    linestream >> label >> value;
+    stats = std::stoi(value);
+  }
+
+  return stats;
+}
 
 // DONE: An example of how to read data from the filesystem
 string LinuxParser::OperatingSystem() {
@@ -35,13 +55,13 @@ string LinuxParser::OperatingSystem() {
 
 // DONE: An example of how to read data from the filesystem
 string LinuxParser::Kernel() {
-  string os, kernel;
+  string os, kernel, version;
   string line;
   std::ifstream stream(kProcDirectory + kVersionFilename);
   if (stream.is_open()) {
     std::getline(stream, line);
     std::istringstream linestream(line);
-    linestream >> os >> kernel;
+    linestream >> os >> version >> kernel;
   }
   return kernel;
 }
@@ -57,7 +77,7 @@ vector<int> LinuxParser::Pids() {
       // Is every character of the name a digit?
       string filename(file->d_name);
       if (std::all_of(filename.begin(), filename.end(), isdigit)) {
-        int pid = stoi(filename);
+        int pid = std::stoi(filename);
         pids.push_back(pid);
       }
     }
@@ -66,18 +86,42 @@ vector<int> LinuxParser::Pids() {
   return pids;
 }
 
-// TODO: Read and return the system memory utilization
-float LinuxParser::MemoryUtilization() { return 0.0; }
+float LinuxParser::MemoryUtilization() {
+  float memInUse {};
+  string line, label, memTotal, memFree;
+  std::ifstream fileStream {kProcDirectory + kMeminfoFilename};
 
-// TODO: Read and return the system uptime
-long LinuxParser::UpTime() { return 0; }
+  if (fileStream.is_open()) {
+    std::getline(fileStream, line);
+    std::istringstream lineStream1 {line};
+    lineStream1 >> label >> memTotal;
+    
+    std::getline(fileStream, line);
+    std::istringstream lineStream2 {line};
+    lineStream2 >> label >> memFree;
+
+    memInUse = 1.0f - std::stof(memFree) / std::stof(memTotal);
+  }
+
+  return memInUse;
+}
+
+long LinuxParser::UpTime() {
+  long upTime {};
+  string line, upTimeSeconds;
+  std::ifstream fileStream {kProcDirectory + kUptimeFilename};
+  if (fileStream.is_open()) {
+    std::getline(fileStream, line);
+    std::istringstream lineStream (line);
+    lineStream >> upTimeSeconds;
+    upTime = (long)floor(std::stof(upTimeSeconds));
+  }
+
+  return upTime;
+}
 
 // TODO: Read and return the number of jiffies for the system
 long LinuxParser::Jiffies() { return 0; }
-
-// TODO: Read and return the number of active jiffies for a PID
-// REMOVE: [[maybe_unused]] once you define the function
-long LinuxParser::ActiveJiffies(int pid[[maybe_unused]]) { return 0; }
 
 // TODO: Read and return the number of active jiffies for the system
 long LinuxParser::ActiveJiffies() { return 0; }
@@ -88,11 +132,17 @@ long LinuxParser::IdleJiffies() { return 0; }
 // TODO: Read and return CPU utilization
 vector<string> LinuxParser::CpuUtilization() { return {}; }
 
-// TODO: Read and return the total number of processes
-int LinuxParser::TotalProcesses() { return 0; }
+int LinuxParser::TotalProcesses() {
+  return getProcessesStatistics(kTotalProcesses);
+}
 
-// TODO: Read and return the number of running processes
-int LinuxParser::RunningProcesses() { return 0; }
+int LinuxParser::RunningProcesses() {
+  return getProcessesStatistics(kRunningProcesses);
+}
+
+// TODO: Read and return the number of active jiffies for a PID
+// REMOVE: [[maybe_unused]] once you define the function
+long LinuxParser::ActiveJiffies(int pid[[maybe_unused]]) { return 0; }
 
 // TODO: Read and return the command associated with a process
 // REMOVE: [[maybe_unused]] once you define the function
