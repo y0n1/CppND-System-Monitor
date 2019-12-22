@@ -4,7 +4,7 @@
 1. Clone the project repository: `git clone https://github.com/y0n1/system-monitor`
 2. Build the project: `make build`
 3. Run the resulting executable: `./build/monitor` or just execute `make run`
-4. Alternatively, you can use the Docker file located inside the `.devcontainer` directory in order to setup the environment with everything you need.
+4. Alternatively, you can use the Docker file located inside the `.devcontainer` directory in order to setup an environment with everything you need.
 
 ## Operating Systems supported
 Currently on Linux is supported, I'll add support for other platforms when I'll have the time 😎
