@@ -1,14 +1,12 @@
 ![System Monitor](images/monitor.png)
 
-# Requirements
+# System Requirements
 
 ## Linux
 Currently on Linux is supported, I'll add support for other platforms when I'll have the time 😎
 
 ## ncurses
 [ncurses](https://www.gnu.org/software/ncurses/) is a library that facilitates text-based graphical output in the terminal. This project relies on ncurses for display output.
-
-If you are not using the Workspace, install ncurses within your own Linux environment: `sudo apt install libncurses5-dev libncursesw5-dev`
 
 ## Make
 This project uses [Make](https://www.gnu.org/software/make/). The Makefile has four targets:
@@ -18,10 +16,8 @@ This project uses [Make](https://www.gnu.org/software/make/). The Makefile has f
 * `clean` deletes the `build/` directory, including all of the build artifacts
 * `run` runs the program, make sure to build it first
 
-## Instructions
-
-1. Clone the project repository: `git clone https://github.com/y0n1/CppND-System-Monitor-Project-Updated.git`
-
+## Getting Started
+1. Clone the project repository: `git clone https://github.com/y0n1/system-monitor`
 2. Build the project: `make build`
-
 3. Run the resulting executable: `./build/monitor` or just execute `make run`
+4. Alternatively, you can use the Docker file located inside the `.devcontainer` directory in order to setup the environment with everything you need.
