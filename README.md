@@ -2,6 +2,9 @@
 
 # Requirements
 
+## Linux
+Currently on Linux is supported, I'll add support for other platforms when I'll have the time 😎
+
 ## ncurses
 [ncurses](https://www.gnu.org/software/ncurses/) is a library that facilitates text-based graphical output in the terminal. This project relies on ncurses for display output.
 
