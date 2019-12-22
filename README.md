@@ -7,7 +7,7 @@
 4. Alternatively, you can use the Docker file located inside the `.devcontainer` directory in order to setup an environment with everything you need.
 
 ## Operating Systems supported
-Currently on Linux is supported, I'll add support for other platforms when I'll have the time 😎
+Currently only Linux is supported, I'll add support for other platforms when I'll have the time 😎
 
 ### ncurses
 [ncurses](https://www.gnu.org/software/ncurses/) is a library that facilitates text-based graphical output in the terminal. This project relies on ncurses for display output.
