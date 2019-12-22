@@ -9,6 +9,13 @@
 using std::string;
 using std::vector;
 
+System::System() {
+  for (auto& pid : LinuxParser::Pids()) {
+    Process proc{pid};
+    processes_.push_back(proc);
+  }
+}
+
 // TODO: Return the system's CPU
 Processor& System::Cpu() { return cpu_; }
 
